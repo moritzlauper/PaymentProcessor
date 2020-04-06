@@ -1,1 +1,0 @@
-#in while true awaits await_receipt, collects invoice.txt and calls send_receipt

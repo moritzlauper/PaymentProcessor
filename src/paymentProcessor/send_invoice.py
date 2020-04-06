@@ -1,1 +1,0 @@
-#triggered by end of process_bill.py sends to pmt system in via ftp
