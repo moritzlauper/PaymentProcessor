@@ -12,4 +12,4 @@ async def await_receipt():
 
 async def receipt_routine():
     while True:
-        print(await asyncio.ensure_future(process_receipt(await asyncio.ensure_future(await_receipt()))))
+        await asyncio.ensure_future(process_receipt(await asyncio.ensure_future(await_receipt())))
