@@ -1,9 +1,11 @@
+dicttoxml
 # dependencies
 loguru>=0.4,<0.5
 
 # meta
 pytest>=5.3,<6
 pylint>=2.4,<3
+
 
 # self
 -e .
