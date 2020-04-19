@@ -19,7 +19,7 @@ class InvoiceItem:
             'BV.030_Verrechneter_Einzelpreis_des_Artikels': model_of_current[4],
             'BV.040_Waehrung_des_Einzelpreises': 'CHF',
             'BV.070_Bestaetigter_Gesamtpreis_der_Position_netto': model_of_current[5],
-            'BV.080_Bestaetigter_Gesamtpreis_der_Position_brutto': float(model_of_current[5]) + (float(model_of_current[5]) * float(str(model_of_current[6]).split('%')[0])),
+            'BV.080_Bestaetigter_Gesamtpreis_der_Position_brutto': float(model_of_current[5]) + (float(model_of_current[5]) * float(str(model_of_current[6]).split('%')[0]) / 100),
             'BV.090_Waehrung_des_Gesamtpreises': 'CHF'
         }
 
@@ -28,7 +28,7 @@ class InvoiceItem:
             'BV.020_Steuersatz_Kategorie': 'Standard Satz',
             'BV.030_Steuersatz': str(model_of_current[6]).split('%')[0],
             'BV.040_Zu_versteuernder_Betrag': model_of_current[5],
-            'BV.050_Steuerbetrag': (float(model_of_current[5]) * float(str(model_of_current[6]).split('%')[0]))
+            'BV.050_Steuerbetrag': (float(model_of_current[5]) * float(str(model_of_current[6]).split('%')[0]) / 100)
         }
 
     def to_dict(self):

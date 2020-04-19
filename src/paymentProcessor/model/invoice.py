@@ -7,10 +7,11 @@ from paymentProcessor.model.invoice_summary import InvoiceSummary
 
 
 def to_dict(filecontent):
+    invoice_detail = InvoiceDetail(filecontent)
     return {
         'Invoice_Header': InvoiceHeader(filecontent).to_dict(),
-        'Invoice_Detail': InvoiceDetail(filecontent).to_dict(),
-        'Invoice_Summary': InvoiceSummary(filecontent).to_dict()
+        'Invoice_Detail': invoice_detail.to_dict(),
+        'Invoice_Summary': InvoiceSummary(invoice_detail.calculate_summary()).to_dict()
     }
 
 
