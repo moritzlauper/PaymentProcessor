@@ -5,6 +5,7 @@ from xml.dom.minidom import parseString
 
 
 async def process_bill(filename: str, filecontent: [[str]]):
-    print(parseString(invoice.to_xml(filecontent)).toprettyxml())
+    xml_string = invoice.to_xml(filecontent)
+    print(parseString(xml_string).toprettyxml())
 
 

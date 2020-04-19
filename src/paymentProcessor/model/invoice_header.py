@@ -48,7 +48,7 @@ class InvoiceHeader:
         # I.H.030_Lieferanten_Identifikation
         self.supplier_identification = {
             'BV.010_Nr_Lieferant_beim_Kaeufer': model[1][2],
-            'BV.030_Nr_Lieferant_bei_ETS': 'moritz.lauper@edu.tbz.ch', #-> ?
+            'BV.030_Nr_Lieferant_bei_ETS': 'moritz.lauper@edu.tbz.ch',
             'BV.040_Name1': model[1][3],
             'BV.070_Strasse': model[1][4],
             'BV.100_PLZ': str(model[1][5]).split(' ')[0],

@@ -7,7 +7,7 @@ class InvoiceItem:
         self.basic_data = {
             'BV.010_Positions_Nr_in_der_Rechnung': model_of_current[1],
             'BV.020_Artikel_Nr_des_Lieferanten': '',    # -> ? e.g 569503/0589
-            #'BV.030_Artikel_Nr_des_Lieferanten_Erweiterung': '',
+            'BV.030_Artikel_Nr_des_Lieferanten_Erweiterung': model_of_current[1],
             #'BV.040_Referenz_zur_Bestellung_Bestell_Nr_des_Kaeufers': '', braucht es die?
             'BV.070_Artikel_Beschreibung': 'Beschreibung...',    # -> ?
             'BV.140_Abschlussdatum_der_Lieferung_Ausfuehrung': date_time(model[0][3], model[0][4])
