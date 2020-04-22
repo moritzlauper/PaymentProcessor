@@ -5,7 +5,7 @@ from xml.dom.minidom import parseString
 
 
 async def process_bill(filename: str, filecontent: [[str]]):
-    xml_string = invoice.to_xml(filecontent)
-    print(parseString(xml_string).toprettyxml())
-
-
+    with open('K123_21003_invoice.xml', 'w+', encoding='utf-8') as f:
+        f.writelines(parseString(invoice.to_xml(filecontent)).toprettyxml())
+    with open('K123_21003_invoice.txt', 'w+', encoding='utf-8') as f:
+        f.writelines(invoice.to_txt(filecontent))

@@ -36,8 +36,8 @@ class InvoiceHeader:
         # I.H.020_Einkaeufer_Identifikation
         self.client_identification = {
             'BV.010_Nr_Kaeufer_beim_Lieferanten': 'undef',
-            'BV.020_Nr_Kaeufer_beim_Kaeufer': '',  # -> ?
-            'BV.030_Nr_Kaeufer_bei_ETS': model[2][1],
+            'BV.020_Nr_Kaeufer_beim_Kaeufer': model[2][1],
+            'BV.030_Nr_Kaeufer_bei_ETS': '',
             'BV.035_Typ_der_Handelsplatz_ID': 'TPID',
             'BV.040_Name1': model[2][2],
             'BV.100_PLZ': str(model[2][4]).split(' ')[0],

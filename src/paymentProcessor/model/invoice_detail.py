@@ -25,8 +25,8 @@ class InvoiceDetail:
     def calculate_summary(self):
         return {
             'item_count': len(self.invoice_items),
-            'total_vat_excluded': self.total_vat_excluded,
-            'total_vat_included': self.total_vat_included,
+            'total_vat_excluded': self.total_vat_excluded if str(self.total_vat_excluded).split('.')[1] != '0' else str(self.total_vat_excluded).replace('.0', '.00'),
+            'total_vat_included': self.total_vat_included if str(self.total_vat_included).split('.')[1] != '0' else str(self.total_vat_included).replace('.0', '.00'),
             'total_vat': self.total_vat,
             'percent_vat': self.percent_vat
         }

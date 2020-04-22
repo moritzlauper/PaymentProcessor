@@ -17,7 +17,7 @@ class InvoiceSummary:
         self.taxes = {
             'BV.010_Funktion_der_Steuer': 'Steuer',
             'BV.020_Steuersatz_Kategorie': 'Standard Satz',
-            'BV.030_Steuersatz': '0.00',  # model.get('total_vat'),
+            'BV.030_Steuersatz': model.get('percent_vat'),
             'BV.040_Zu_versteuernder_Betrag': model.get('total_vat_excluded'),
             'BV.050_Steuerbetrag': model.get('total_vat'),
             'BV.055_Waehrung_Steuerbetrag': 'CHF'
