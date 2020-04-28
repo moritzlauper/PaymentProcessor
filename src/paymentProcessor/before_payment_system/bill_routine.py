@@ -26,11 +26,21 @@ class BillRoutine:
             ftp.cwd(remote_path)
             for file in ftp.nlst('.'):
                 if file.endswith('.data'):
-                    await asyncio.sleep(1)
-                    ftp.retrbinary('RETR ' + file, self.format)
-                    await process_bill(file, self.fileobjects)
-                    self.fileobjects = []
-                    # ftp.delete(file)
+                    try:
+                        ftp.retrbinary('RETR ' + file, self.format)
+                        await process_bill(self.fileobjects)
+                        ftp.delete(file)
+                        return False
+                    except:
+                        print('The file has the wrong format.')
+            return True
 
     async def bill_routine(self):
-        await asyncio.ensure_future(self.await_bill())
+        print('---scanning client out---')
+        in_progress = True
+        while in_progress:
+            in_progress = await asyncio.ensure_future(self.await_bill())
+            await asyncio.sleep(10)
+        model = self.fileobjects
+        self.fileobjects = []
+        return model
