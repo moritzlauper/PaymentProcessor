@@ -22,25 +22,28 @@ class BillRoutine:
 
     async def await_bill(self):
         remote_path = '/out/AP17bLauper/'
-        with FTP('ftp.haraldmueller.ch', 'schoolerinvoices', 'Berufsschule8005!') as ftp:
-            ftp.cwd(remote_path)
-            for file in ftp.nlst('.'):
-                if file.endswith('.data'):
-                    try:
-                        ftp.retrbinary('RETR ' + file, self.format)
-                        await process_bill(self.fileobjects)
-                        ftp.delete(file)
-                        return False
-                    except:
-                        print('The file has the wrong format.')
-            return True
+        try:
+            with FTP('ftp.haraldmueller.ch', 'schoolerinvoices', 'Berufsschule8005!') as ftp:
+                ftp.cwd(remote_path)
+                for file in ftp.nlst('.'):
+                    if file.endswith('.data'):
+                        try:
+                            ftp.retrbinary('RETR ' + file, self.format)
+                            await process_bill(self.fileobjects)
+                            ftp.delete(file)
+                            return False
+                        except:
+                            print('The file has the wrong format.')
+        except:
+            print('Could not establish ftp connection')
+        return True
 
     async def bill_routine(self):
         print('---scanning client out---')
         in_progress = True
         while in_progress:
             in_progress = await asyncio.ensure_future(self.await_bill())
-            await asyncio.sleep(10)
+            await asyncio.sleep(60)
         model = self.fileobjects
         self.fileobjects = []
         return model
