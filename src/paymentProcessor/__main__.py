@@ -1,4 +1,5 @@
 import asyncio
+import os
 from src.paymentProcessor.before_payment_system.bill_routine import BillRoutine
 from src.paymentProcessor.after_payment_system.receipt_routine import ReceiptRoutine
 
@@ -20,6 +21,7 @@ async def main():
 
 #asyncio.run(main())
 
+os.chdir('inv')
 while True:
     model = asyncio.run(await_bill())
     asyncio.run(await_receipt(model))

@@ -14,13 +14,13 @@ class ProcessReceipt:
         zipObj = ZipFile(invoice_filename + '.zip', 'w')
         zipObj.write(invoice_filename + '.txt')
         zipObj.write(receipt)
+        zipObj.close()
         remote_path = '/in/AP17bLauper/'
         with FTP('ftp.haraldmueller.ch', 'schoolerinvoices', 'Berufsschule8005!') as ftp:
             ftp.cwd(remote_path)
             print('Uploading Zip to client ftp server in...')
             print(ftp.storbinary(f'STOR {zipObj.filename}', open(f'{zipObj.filename}', 'rb')))
         await send_receipt(zipObj.filename, model)
-        zipObj.close()
         os.remove(invoice_filename + '.txt')
         os.remove(invoice_filename + '.zip')
         os.remove(receipt)
