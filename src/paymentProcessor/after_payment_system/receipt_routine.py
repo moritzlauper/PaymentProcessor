@@ -34,5 +34,5 @@ class ReceiptRoutine:
                 in_progress = await asyncio.ensure_future(self.await_receipt(model, ftp))
                 await asyncio.sleep(60)
             ftp.close()
-        except:
-            print('Could not establish ftp connection')
+        except Exception as e:
+            print(e)

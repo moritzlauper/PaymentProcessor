@@ -1,3 +1,4 @@
+import os
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
 
@@ -32,7 +33,7 @@ class Invoice:
                         , self.e(model[2][2], True), self.e(model[2][3], True), self.e(model[2][4], True))
 
         txt_string += '\n\nKundennummer:\t\t %s\nAuftragsnummer:\t\t %s\n\nRechnung Nr:\t\t%s\n-------------------------' \
-                      % (self.e(model[1][1]), self.e(model[0][1]), self.e(model[0][0]))
+                      % (self.e(model[1][1], True), self.e(model[0][1]), self.e(model[0][0]))
 
         for item in dict_model.get('Invoice_Detail'):
             item = item.get('Invoice_Items')
@@ -74,6 +75,7 @@ class Invoice:
         txt_string += f'\n\n{self.e(model[2][2])}\n{self.e(model[2][3])}\n{self.e(model[2][4])}'
 
         if not self.status:
+            self.status = True
             raise BaseException('Not all required fields were defined.')
         return txt_string
 
@@ -81,6 +83,9 @@ class Invoice:
         try:
             if not str(e):
                 if r:
+                    for item in os.listdir('.'):
+                        if item.endswith('.txt'):
+                            os.remove(item)
                     raise BaseException('One required Argument was empty')
                 raise Exception('One Argument was empty')
             return e

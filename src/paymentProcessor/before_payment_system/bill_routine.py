@@ -26,10 +26,13 @@ class BillRoutine:
                 try:
                     ftp.retrbinary('RETR ' + file, self.format)
                     await process_bill(self.fileobjects)
-                    ftp.delete(file)
                     return False
                 except:
+                    self.fileobjects = []
                     print('The file has the wrong format.')
+                    return True
+                finally:
+                    ftp.delete(file)
         return True
 
     async def bill_routine(self):

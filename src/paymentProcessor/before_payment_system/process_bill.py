@@ -26,8 +26,8 @@ async def process_bill(filecontent: [[str]]):
         print(session.storbinary(f'STOR {filename}.xml', open(f'{filename}.xml', 'rb')))
         os.remove(f'{filename}.xml')
         session.quit()
-    except Exception as e:
-        print(e)
-    except BaseException as e:
-        print(e)
+    except Exception:
+        raise Exception
+    except BaseException:
+        raise BaseException
     return
