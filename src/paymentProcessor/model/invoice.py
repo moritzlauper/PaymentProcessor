@@ -1,7 +1,7 @@
 import os
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
-
+from loguru import logger
 from paymentProcessor.model.invoice_detail import InvoiceDetail
 from paymentProcessor.model.invoice_header import InvoiceHeader
 from paymentProcessor.model.invoice_summary import InvoiceSummary
@@ -52,8 +52,8 @@ class Invoice:
         txt_string += '\n                                                             Total {0}\t   {1:9.2f}\n\n                                                             MWST  {2}\t   {3:9.2f}' \
             .format(dict_model.get('Invoice_Summary').get('I.S.010_Basisdaten').get(
             'BV.030_Waehrung_Gesamtbetrag_der_Rechnung_exkl_MwSt_exkl_Ab_Zuschlag')
-            , float(dict_model.get('Invoice_Summary').get('I.S.010_Basisdaten').get(
-                'BV.020_Gesamtbetrag_der_Rechnung_exkl_MwSt_exkl_Ab_Zuschlag'))
+            , self.e(float(dict_model.get('Invoice_Summary').get('I.S.010_Basisdaten').get(
+                'BV.020_Gesamtbetrag_der_Rechnung_exkl_MwSt_exkl_Ab_Zuschlag')))
             , dict_model.get('Invoice_Summary').get('I.S.020_Aufschluesselung_der_Steuern').get(
                 'BV.055_Waehrung_Steuerbetrag')
             , float(dict_model.get('Invoice_Summary').get('I.S.020_Aufschluesselung_der_Steuern').get(
@@ -90,7 +90,7 @@ class Invoice:
                 raise Exception('One Argument was empty')
             return e
         except Exception as exc:
-            print(exc)
+            logger.info(exc)
         except BaseException as exc:
-            print(exc)
+            logger.info(exc)
             self.status = False

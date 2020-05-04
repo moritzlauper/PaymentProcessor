@@ -1,6 +1,9 @@
 import asyncio
+from loguru import logger
 from paymentProcessor.before_payment_system.process_bill import process_bill
 from ftplib import FTP
+
+logger.add('out.log')
 
 
 # synchronises client out with local list & can return mutliple 'rechnung.csv'
@@ -29,14 +32,14 @@ class BillRoutine:
                     return False
                 except:
                     self.fileobjects = []
-                    print('The file has the wrong format.')
+                    logger.info('The file has the wrong format.')
                     return True
                 finally:
                     ftp.delete(file)
         return True
 
     async def bill_routine(self):
-        print('---scanning client out---')
+        logger.info('---scanning client out---')
         remote_path = '/out/AP17bLauper/'
         try:
             ftp = FTP('ftp.haraldmueller.ch', 'schoolerinvoices', 'Berufsschule8005!')
@@ -50,4 +53,4 @@ class BillRoutine:
             ftp.close()
             return model
         except:
-            print('Could not establish ftp connection')
+            logger.info('Could not establish ftp connection')

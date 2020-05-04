@@ -1,7 +1,7 @@
 from ftplib import FTP
 from zipfile import ZipFile
 import os
-
+from loguru import logger
 from src.paymentProcessor.after_payment_system.send_receipt import send_receipt
 
 
@@ -18,8 +18,8 @@ class ProcessReceipt:
         remote_path = '/in/AP17bLauper/'
         with FTP('ftp.haraldmueller.ch', 'schoolerinvoices', 'Berufsschule8005!') as ftp:
             ftp.cwd(remote_path)
-            print('Uploading Zip to client ftp server in...')
-            print(ftp.storbinary(f'STOR {zipObj.filename}', open(f'{zipObj.filename}', 'rb')))
+            logger.info('Uploading Zip to client ftp server in...')
+            logger.info(ftp.storbinary(f'STOR {zipObj.filename}', open(f'{zipObj.filename}', 'rb')))
         await send_receipt(zipObj.filename, model)
         os.remove(invoice_filename + '.txt')
         os.remove(invoice_filename + '.zip')

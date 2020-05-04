@@ -1,5 +1,6 @@
 from paymentProcessor.model.invoice import Invoice
 from xml.dom.minidom import parseString
+from loguru import logger
 import ftplib
 import asyncio
 import os
@@ -21,9 +22,9 @@ async def process_bill(filecontent: [[str]]):
             f.writelines(parseString(xml).toprettyxml())
         with open(f'{filename}.txt', 'w+', encoding='utf-8') as f:
             f.writelines(txt)
-        print('Uploading invoice to payment server...')
-        print(session.storlines(f'STOR {filename}.txt', open(f'{filename}.txt', 'rb')))
-        print(session.storbinary(f'STOR {filename}.xml', open(f'{filename}.xml', 'rb')))
+        logger.info('Uploading invoice to payment server...')
+        logger.info(session.storlines(f'STOR {filename}.txt', open(f'{filename}.txt', 'rb')))
+        logger.info(session.storbinary(f'STOR {filename}.xml', open(f'{filename}.xml', 'rb')))
         os.remove(f'{filename}.xml')
         session.quit()
     except Exception:

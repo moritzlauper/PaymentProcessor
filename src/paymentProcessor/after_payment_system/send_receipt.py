@@ -1,4 +1,4 @@
-import asyncio
+from loguru import logger
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -40,7 +40,7 @@ async def send_receipt(zip_name, model):
         session.login(sender_address, sender_pass)  # login with mail_id and password
         text = message.as_string()
         session.sendmail(sender_address, receiver_address, text)
-        print('Mail was sent to client.')
+        logger.info('Mail was sent to client.')
         session.quit()
     except:
-        print('Mail could not be sent.')
+        logger.info('Mail could not be sent.')

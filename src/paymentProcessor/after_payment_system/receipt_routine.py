@@ -1,7 +1,7 @@
 import asyncio
 from ftplib import FTP
 import os
-
+from loguru import logger
 from src.paymentProcessor.after_payment_system.process_receipt import ProcessReceipt
 
 process_receipt = ProcessReceipt()
@@ -24,7 +24,7 @@ class ReceiptRoutine:
         return True
 
     async def receipt_routine(self, model):
-        print('---scanning payment service out---')
+        logger.info('---scanning payment service out---')
         remote_path = '/out/AP17bLauper/'
         try:
             ftp = FTP('134.119.225.245', '310721-297-zahlsystem', 'Berufsschule8005!')
@@ -35,4 +35,4 @@ class ReceiptRoutine:
                 await asyncio.sleep(60)
             ftp.close()
         except Exception as e:
-            print(e)
+            logger.info(e)
