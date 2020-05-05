@@ -1,0 +1,12 @@
+2020-05-04 22:00:57.783 | INFO     | src.paymentProcessor.before_payment_system.bill_routine:bill_routine:42 - ---scanning client out---
+2020-05-04 22:13:01.434 | INFO     | paymentProcessor.before_payment_system.process_bill:process_bill:25 - Uploading invoice to payment server...
+2020-05-04 22:13:01.581 | INFO     | paymentProcessor.before_payment_system.process_bill:process_bill:26 - 226-File successfully transferred
+226 0.026 seconds (measured here), 39.83 Kbytes per second
+2020-05-04 22:13:01.782 | INFO     | paymentProcessor.before_payment_system.process_bill:process_bill:27 - 226-File successfully transferred
+226 0.078 seconds (measured here), 111.40 Kbytes per second
+2020-05-04 22:14:01.851 | INFO     | src.paymentProcessor.after_payment_system.receipt_routine:receipt_routine:27 - ---scanning payment service out---
+2020-05-04 22:15:03.771 | INFO     | src.paymentProcessor.after_payment_system.process_receipt:process:21 - Uploading Zip to client ftp server in...
+2020-05-04 22:15:03.932 | INFO     | src.paymentProcessor.after_payment_system.process_receipt:process:22 - 226 Transfer complete
+2020-05-04 22:15:05.209 | INFO     | src.paymentProcessor.after_payment_system.send_receipt:send_receipt:43 - Mail was sent to client.
+2020-05-04 22:16:05.336 | INFO     | src.paymentProcessor.before_payment_system.bill_routine:bill_routine:42 - ---scanning client out---
+2020-05-04 22:16:06.648 | INFO     | src.paymentProcessor.before_payment_system.bill_routine:await_bill:35 - The file has the wrong format.
